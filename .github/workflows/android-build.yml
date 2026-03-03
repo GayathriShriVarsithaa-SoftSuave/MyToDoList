@@ -3,17 +3,17 @@ name: Android CI
 on:
   push:
     branches:
-      - main       # triggers only on pushes to main
+      - '**'       # triggers on push to any branch
   pull_request:
     branches:
-      - main       # triggers on PR to main
+      - '**'       # triggers on PR to any branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repository with full history (needed for tagging)
+      # 1. Checkout repository with full history
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
@@ -38,29 +38,27 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: debug-apk
+          name: debug-apk-${{ github.ref_name }}
           path: app/build/outputs/apk/debug/app-debug.apk
 
-      # 6. Create automatic tag only on main branch pushes
+      # 6. Create a unique tag for this branch (optional for all branches)
       - name: Create Tag
-        if: github.ref == 'refs/heads/main'
         run: |
-          TAG=v1.${{ github.run_number }}
+          TAG=${{ github.ref_name }}-v1.${{ github.run_id }}
           echo "TAG=$TAG" >> $GITHUB_ENV
           git tag $TAG
           git push origin $TAG
 
-      # 7. Create GitHub release and attach APK (uses the created tag)
+      # 7. Create GitHub release using the created tag
       - name: Create Release
-        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ env.TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # 8. Upload APK to the release
       - name: Upload APK to Release
-        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v1
         with:
           files: app/build/outputs/apk/debug/app-debug.apk

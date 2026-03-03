@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/popUpHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -23,6 +24,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/popUpTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -32,6 +34,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/popUpTitleBox"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
@@ -42,7 +45,120 @@
             android:paddingStart="20dp"
             android:textColor="#A5A5A5"
             android:textColorHint="#4D5650"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:backgroundTint="#141C17"/>
+
+        <TextView
+            android:id="@+id/popUpDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Description"
+            android:textColor="#A5A5A5"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/popUpDescriptionBox"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/box"
+            android:gravity="top"
+            android:hint="Add more details..."
+            android:inputType="textMultiLine"
+            android:paddingStart="20dp"
+            android:paddingTop="7dp"
+            android:scrollbars="vertical"
+            android:textColor="#A5A5A5"
+            android:textColorHint="#4D5650"
+            android:textSize="14sp"
+            android:backgroundTint="#141C17"/>
+
+        <TextView
+            android:id="@+id/popupTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Tags"
+            android:textColor="#A5A5A5"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/popUpChip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="8dp"
+            app:singleLine="false">
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/tagEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/box"
+            android:drawableEnd="@drawable/baseline_add_24"
+            android:gravity="center_vertical"
+            android:hint="Add tag..."
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="50dp"
+            android:backgroundTint="#141C17"
+            android:textColor="#A5A5A5"
+            android:textColorHint="#4D5650"
+            android:textSize="14sp"
+            android:drawableTint="#A5A5A5"
+            android:layout_marginEnd="15dp"/>
+        <TextView
+            android:id="@+id/popupDeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Deadline"
+            android:textColor="#A5A5A5"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <CalendarView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectedDateVerticalBar="@color/green"
+            android:id="@+id/popUpCalendar"
+            android:weekNumberColor="@color/white"
+            android:weekDayTextAppearance="@style/WhiteWeekText"
+            android:dateTextAppearance="@style/WhiteDateText"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel"
+                app:cornerRadius="10dp"
+                android:backgroundTint="#141C17"
+                android:textColor="@color/white"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add Task"
+                android:textColor="@color/black"
+                app:cornerRadius="10dp"
+                android:backgroundTint="#1DE9B6"/>
+        </LinearLayout>
 
     </LinearLayout>
 
