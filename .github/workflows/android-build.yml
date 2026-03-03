@@ -46,16 +46,16 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           TAG=v1.${{ github.run_number }}
-          echo "Creating tag $TAG"
+          echo "TAG=$TAG" >> $GITHUB_ENV
           git tag $TAG
           git push origin $TAG
 
-      # 7. Create GitHub release and attach APK
+      # 7. Create GitHub release and attach APK (uses the created tag)
       - name: Create Release
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v1.${{ github.run_number }}
+          tag_name: ${{ env.TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,3 +64,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: app/build/outputs/apk/debug/app-debug.apk
+          tag_name: ${{ env.TAG }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
