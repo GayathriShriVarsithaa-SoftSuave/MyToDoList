@@ -3,48 +3,42 @@ name: Android CI
 on:
   push:
     branches:
-      - '**'      # triggers on push to any branch
+      - main       # triggers only on pushes to main
   pull_request:
     branches:
-      - '**'      # triggers on PR to any branch
+      - main       # triggers on PR to main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repository with full history for tagging
+      # Checkout repository with full history
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0   # necessary to push tags
+          fetch-depth: 0   # important for tagging
 
-      # Step 2: Setup JDK
+      # Setup JDK
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # Step 3: Grant permission to gradlew
+      # Grant gradlew permission
       - name: Grant Permission
         run: chmod +x gradlew
 
-      # Step 4: Clean and build project
+      # Clean and build the project
       - name: Build Project
         run: ./gradlew clean assembleDebug
 
-      # Step 5: Create automatic tag (only on push)
+      # Create automatic tag only on main branch pushes
       - name: Create Tag
-        if: github.event_name == 'push'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.ref == 'refs/heads/main'
         run: |
-          set -e
-          git fetch --tags
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
           TAG=v1.${{ github.run_number }}
           echo "Creating tag $TAG"
           git tag $TAG
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git --tags
+          git push origin $TAG
