@@ -16,6 +16,8 @@ jobs:
       # Step 1: Checkout repository
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0   # Needed to fetch full history for tagging
 
       # Step 2: Setup JDK
       - name: Setup JDK
