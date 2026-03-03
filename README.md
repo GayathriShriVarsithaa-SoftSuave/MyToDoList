@@ -12,6 +12,8 @@ A simple To-Do List Android application built using Kotlin, Material Components,
 - Used **Material Components** for modern UI.
 - Implemented MVVM architecture
 - Fragment-based navigation implemented.
+- Implemented room database.
+- Implemented many to many relationships.
 
 ---
 
