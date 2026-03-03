@@ -27,6 +27,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"
             android:clickable="true"
+            android:id="@+id/searchIcon"
             android:focusable="true"
             android:src="@drawable/baseline_search_24"
             app:layout_constraintEnd_toEndOf="parent"
