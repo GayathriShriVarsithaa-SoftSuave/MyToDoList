@@ -13,28 +13,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository with full history
+      # 1. Checkout repository with full history (needed for tagging)
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0   # important for tagging
+          fetch-depth: 0
 
-      # Setup JDK
+      # 2. Setup JDK
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # Grant gradlew permission
+      # 3. Grant gradlew permission
       - name: Grant Permission
         run: chmod +x gradlew
 
-      # Clean and build the project
+      # 4. Clean and build the project
       - name: Build Project
         run: ./gradlew clean assembleDebug
 
-      # Create automatic tag only on main branch pushes
+      # 5. Upload APK as workflow artifact
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+      # 6. Create automatic tag only on main branch pushes
       - name: Create Tag
         if: github.ref == 'refs/heads/main'
         run: |
@@ -42,3 +49,18 @@ jobs:
           echo "Creating tag $TAG"
           git tag $TAG
           git push origin $TAG
+
+      # 7. Create GitHub release and attach APK
+      - name: Create Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.${{ github.run_number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload APK to Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: app/build/outputs/apk/debug/app-debug.apk
