@@ -17,7 +17,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0   # Needed to fetch full history for tagging
+          fetch-depth: 0  # needed to push tags
 
       # Step 2: Setup JDK
       - name: Setup JDK
@@ -37,11 +37,14 @@ jobs:
       # Step 5: Create automatic tag (only on push)
       - name: Create Tag
         if: github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
           git fetch --tags
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           TAG=v1.${{ github.run_number }}
           git tag $TAG
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git --tags
+          # Push tags using the provided GITHUB_TOKEN
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git --tags
