@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repository
+      # Step 1: Checkout repository with full history for tagging
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # needed to push tags
+          fetch-depth: 0   # necessary to push tags
 
       # Step 2: Setup JDK
       - name: Setup JDK
@@ -45,6 +45,6 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           TAG=v1.${{ github.run_number }}
+          echo "Creating tag $TAG"
           git tag $TAG
-          # Push tags using the provided GITHUB_TOKEN
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git --tags
