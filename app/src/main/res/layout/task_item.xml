@@ -4,9 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="#163D2B"
+    android:backgroundTint="@color/darkBlue"
     android:layout_marginBottom="20dp"
     app:cardElevation="10dp"
+    app:strokeColor="@color/darkGreen"
+    android:id="@+id/taskContainer"
+    app:strokeWidth="2dp"
     app:cardCornerRadius="20dp"
     >
     <LinearLayout
@@ -17,24 +20,30 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:layout_marginEnd="15dp">
-        <LinearLayout
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/taskCheckbox"
+           />
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TEXT"
+                android:text="@string/text"
                 android:id="@+id/taskTitle"
                 android:textColor="@color/white"
-                android:textSize="18dp"
-                android:layout_marginBottom="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text="@string/description1"
                 android:id="@+id/taskDescription"
                 android:textColor="#A8BDB4"
                 android:layout_marginBottom="10dp"
@@ -48,11 +57,7 @@
                 app:chipSpacingHorizontal="8dp"
                 app:chipSpacingVertical="8dp"/>
             </LinearLayout>
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/taskCheckbox"
-        app:buttonTint="@color/white"/>
+
 
 
     </LinearLayout>

@@ -9,4 +9,17 @@
     <string name="description">DESCRIPTION</string>
     <string name="tasks">Tasks</string>
     <string name="new_task1">New Task</string>
+    <string name="search_icon">search icon</string>
+    <string name="add_more_details">Add more details...</string>
+    <string name="tags">Tags</string>
+    <string name="add_tag">Add tag...</string>
+    <string name="deadline">Deadline</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_task">Add Task</string>
+    <string name="description1">Description</string>
+    <string name="text">TEXT</string>
+    <string name="no_results_found">No Results found!!</string>
+    <string name="filtered_results">FILTERED RESULTS</string>
+    <string name="search_tasks_descriptions">Search tasks, descriptions...</string>
+    <string name="search_amp_filter"><![CDATA[Search & Filter]]></string>
 </resources>

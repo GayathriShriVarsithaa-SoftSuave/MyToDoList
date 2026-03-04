@@ -19,5 +19,11 @@
     <style name="WhiteDateText">
         <item name="android:textColor">@android:color/white</item>
     </style>
+    <style name="CustomChipStyle" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/mediumGreen</item>
+        <item name="android:textColor">@color/textWhite</item>
+        <item name="closeIconTint">@color/textWhite</item>
+        <item name="chipStrokeWidth">0dp</item>
+    </style>
 
 </resources>

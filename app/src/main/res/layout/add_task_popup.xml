@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="#0A110D"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:layout_height="match_parent"
+    android:background="@color/darkGreen"
+    android:orientation="vertical">
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/new_task"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/textWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -29,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/task_title"
-            android:textColor="#A5A5A5"
+            android:textColor="@color/textWhite60"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -43,18 +48,20 @@
             android:hint="@string/add_title"
             android:inputType="text"
             android:paddingStart="20dp"
-            android:textColor="#A5A5A5"
-            android:textColorHint="#4D5650"
+            android:paddingEnd="20dp"
+            android:importantForAutofill="no"
+            android:textColor="@color/textWhite60"
+            android:textColorHint="@color/textWhite54"
             android:textSize="14sp"
-            android:backgroundTint="#141C17"/>
+            android:backgroundTint="@color/mediumGreen"/>
 
         <TextView
             android:id="@+id/popUpDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Description"
-            android:textColor="#A5A5A5"
+            android:text="@string/description1"
+            android:textColor="@color/textWhite60"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -66,23 +73,25 @@
             android:layout_marginEnd="15dp"
             android:background="@drawable/box"
             android:gravity="top"
-            android:hint="Add more details..."
+            android:importantForAutofill="no"
+            android:hint="@string/add_more_details"
             android:inputType="textMultiLine"
             android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:paddingTop="7dp"
             android:scrollbars="vertical"
-            android:textColor="#A5A5A5"
-            android:textColorHint="#4D5650"
+            android:textColor="@color/textWhite60"
+            android:textColorHint="@color/textWhite54"
             android:textSize="14sp"
-            android:backgroundTint="#141C17"/>
+            android:backgroundTint="@color/mediumGreen"/>
 
         <TextView
             android:id="@+id/popupTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Tags"
-            android:textColor="#A5A5A5"
+            android:text="@string/tags"
+            android:textColor="@color/textWhite60"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -107,16 +116,17 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
+            android:importantForAutofill="no"
             android:background="@drawable/box"
             android:drawableEnd="@drawable/baseline_add_24"
             android:gravity="center_vertical"
-            android:hint="Add tag..."
+            android:hint="@string/add_tag"
             android:inputType="text"
             android:paddingStart="20dp"
             android:paddingEnd="50dp"
-            android:backgroundTint="#141C17"
-            android:textColor="#A5A5A5"
-            android:textColorHint="#4D5650"
+            android:backgroundTint="@color/mediumGreen"
+            android:textColor="@color/textWhite60"
+            android:textColorHint="@color/textWhite54"
             android:textSize="14sp"
             android:drawableTint="#A5A5A5"
             android:layout_marginEnd="15dp"/>
@@ -125,8 +135,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Deadline"
-            android:textColor="#A5A5A5"
+            android:text="@string/deadline"
+            android:textColor="@color/textWhite60"
             android:textSize="14sp"
             android:textStyle="bold" />
         <CalendarView
@@ -146,20 +156,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 app:cornerRadius="10dp"
-                android:backgroundTint="#141C17"
-                android:textColor="@color/white"/>
+                android:id="@+id/cancelBtn"
+                android:backgroundTint="@color/mediumGreen"
+                android:textColor="@color/textWhite60"/>
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add Task"
+                android:text="@string/add_task"
+                android:id="@+id/addBtn"
                 android:textColor="@color/black"
                 app:cornerRadius="10dp"
-                android:backgroundTint="#1DE9B6"/>
+                android:backgroundTint="@color/primaryGreen"/>
         </LinearLayout>
 
     </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.core.widget.NestedScrollView>
+</LinearLayout>
