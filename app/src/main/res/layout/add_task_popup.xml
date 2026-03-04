@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="#0A110D"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:layout_height="match_parent"
+    android:background="@color/darkGreen"
+    android:orientation="vertical">
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,24 +19,27 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/popUpHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/new_task"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/textWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/popUpTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/task_title"
-            android:textColor="#A5A5A5"
+            android:textColor="@color/textWhite60"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/popUpTitleBox"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
@@ -40,10 +48,130 @@
             android:hint="@string/add_title"
             android:inputType="text"
             android:paddingStart="20dp"
-            android:textColor="#A5A5A5"
-            android:textColorHint="#4D5650"
-            android:textSize="14sp" />
+            android:paddingEnd="20dp"
+            android:importantForAutofill="no"
+            android:textColor="@color/textWhite60"
+            android:textColorHint="@color/textWhite54"
+            android:textSize="14sp"
+            android:backgroundTint="@color/mediumGreen"/>
+
+        <TextView
+            android:id="@+id/popUpDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/description1"
+            android:textColor="@color/textWhite60"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/popUpDescriptionBox"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/box"
+            android:gravity="top"
+            android:importantForAutofill="no"
+            android:hint="@string/add_more_details"
+            android:inputType="textMultiLine"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="7dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/textWhite60"
+            android:textColorHint="@color/textWhite54"
+            android:textSize="14sp"
+            android:backgroundTint="@color/mediumGreen"/>
+
+        <TextView
+            android:id="@+id/popupTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/tags"
+            android:textColor="@color/textWhite60"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/popUpChip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="8dp"
+            app:singleLine="false">
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/tagEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:importantForAutofill="no"
+            android:background="@drawable/box"
+            android:drawableEnd="@drawable/baseline_add_24"
+            android:gravity="center_vertical"
+            android:hint="@string/add_tag"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="50dp"
+            android:backgroundTint="@color/mediumGreen"
+            android:textColor="@color/textWhite60"
+            android:textColorHint="@color/textWhite54"
+            android:textSize="14sp"
+            android:drawableTint="#A5A5A5"
+            android:layout_marginEnd="15dp"/>
+        <TextView
+            android:id="@+id/popupDeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/deadline"
+            android:textColor="@color/textWhite60"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <CalendarView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectedDateVerticalBar="@color/green"
+            android:id="@+id/popUpCalendar"
+            android:weekNumberColor="@color/white"
+            android:weekDayTextAppearance="@style/WhiteWeekText"
+            android:dateTextAppearance="@style/WhiteDateText"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                app:cornerRadius="10dp"
+                android:id="@+id/cancelBtn"
+                android:backgroundTint="@color/mediumGreen"
+                android:textColor="@color/textWhite60"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/add_task"
+                android:id="@+id/addBtn"
+                android:textColor="@color/black"
+                app:cornerRadius="10dp"
+                android:backgroundTint="@color/primaryGreen"/>
+        </LinearLayout>
 
     </LinearLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.core.widget.NestedScrollView>
+</LinearLayout>
