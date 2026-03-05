@@ -2,14 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#01040D"
+    android:background="@color/darkBlue"
     android:paddingBottom="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp">
 
         <TextView
             android:id="@+id/homeTask"
@@ -23,10 +24,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/searchIcon"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="20dp"
             android:clickable="true"
+            android:contentDescription="@string/search_icon"
             android:focusable="true"
             android:src="@drawable/baseline_search_24"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGreen">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:letterSpacing="0.09"
+            android:text="Edit Task"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Task title"
+            android:textColor="@color/textWhite54"
+            android:layout_marginTop="20dp"
+            android:textSize="18dp"
+            android:paddingBottom="10dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/taskEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="text"
+                android:background="@drawable/box"
+                android:textColor="@color/textWhite60"
+                app:backgroundTint="@color/mediumGreen" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textColor="@color/textWhite54"
+            android:layout_marginTop="20dp"
+            android:textSize="18dp"
+            android:paddingBottom="5dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptionEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/box"
+                android:singleLine="false"
+                android:text="description"
+                android:textColor="@color/textWhite60"
+                app:backgroundTint="@color/mediumGreen" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Tags"
+            android:textColor="@color/textWhite60" />
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/popUpChip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="8dp"
+            app:singleLine="false">
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/box"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/mediumGreen"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/tagEditText"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:hint="@string/create_new_tag"
+                android:inputType="text"
+                android:paddingStart="20dp"
+                android:textColor="@color/textWhite60"
+                android:textColorHint="@color/textWhite54"
+                android:textSize="14sp"
+                android:background="@android:color/transparent"
+                android:importantForAutofill="no"/>
+
+            <ImageView
+                android:id="@+id/addTagIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/baseline_add_24"
+                app:tint="@color/textWhite54"
+                android:padding="8dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Deadline"
+            android:textColor="@color/textWhite60" />
+        <CalendarView
+            android:id="@+id/popUpCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dateTextAppearance="@style/WhiteDateText"
+            android:selectedDateVerticalBar="@color/green"
+            android:weekDayTextAppearance="@style/WhiteWeekText"
+            android:weekNumberColor="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="20dp">
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingEnd="10dp"
+                android:id="@+id/cancelBtn"
+                android:text="Cancel"
+                android:backgroundTint="@color/mediumGreen"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/primaryGreen"
+                android:id="@+id/editBtn"
+                android:textColor="@color/black"
+                android:text="Edit"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
