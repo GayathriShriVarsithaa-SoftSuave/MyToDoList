@@ -11,7 +11,7 @@ import com.example.mytodolist.databinding.TaskItemBinding
 import com.google.android.material.chip.Chip
 
 class TaskAdapter(
-    private var taskList: List<TaskWithTags>,
+    var taskList: List<TaskWithTags>,
     private val onCheckedChange: (Long, Boolean) -> Unit,
     private val onItemClick: (Long) -> Unit
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
@@ -37,8 +37,10 @@ class TaskAdapter(
 
         holder.binding.taskTitle.text = taskWithTags.task.title
         holder.binding.taskDescription.text = taskWithTags.task.description
+        val diff = taskWithTags.task.date - System.currentTimeMillis()
+        val daysLeft = diff / (1000 * 60 * 60 * 24)
 
-
+        holder.binding.dayLeft.text = "$daysLeft Days left"
         holder.binding.taskCheckbox.setOnCheckedChangeListener(null)
         holder.binding.taskCheckbox.isChecked = taskWithTags.task.isCompleted
 

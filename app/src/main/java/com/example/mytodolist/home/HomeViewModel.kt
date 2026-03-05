@@ -10,17 +10,16 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    // Initialize DAOs using application context
     private val database = AppDatabase.getDatabase(application)
     private val taskDao: TaskDao = database.taskDao()
     private val tagDao: TagDao = database.tagDao()
     private val myToDoDao: MyToDoListDao = database.myToDoListDao()
-
     val allTasks: Flow<List<TaskWithTags>> = taskDao.getTasksWithTags()
 
     fun addTask(title: String, description: String, tags: List<String>, deadline: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            val taskId = taskDao.insertTask(Task(title = title, description = description, date = deadline))
+            val taskId =
+                taskDao.insertTask(Task(title = title, description = description, date = deadline))
             tags.forEach { tagName ->
                 var tag = tagDao.getTagByName(tagName)
                 if (tag == null) {
@@ -32,6 +31,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    val alltags: Flow<List<String>> = tagDao.getAllTag()
     fun deleteTask(taskWithTags: TaskWithTags) {
         viewModelScope.launch(Dispatchers.IO) {
             taskDao.deleteTask(taskWithTags.task)

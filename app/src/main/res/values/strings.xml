@@ -22,4 +22,5 @@
     <string name="filtered_results">FILTERED RESULTS</string>
     <string name="search_tasks_descriptions">Search tasks, descriptions...</string>
     <string name="search_amp_filter"><![CDATA[Search & Filter]]></string>
+    <string name="create_new_tag">Create new tag...</string>
 </resources>

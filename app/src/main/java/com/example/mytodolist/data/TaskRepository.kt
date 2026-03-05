@@ -37,4 +37,7 @@ class TaskRepository(
     suspend fun updateTaskCompletion(taskId: Long, isCompleted: Boolean) {
         taskDao.updateTaskCompletion(taskId, isCompleted)
     }
+    fun getAllTags():Flow<List<String>>{
+        return tagDao.getAllTag()
+    }
 }

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [Task::class, Tag::class, MyToDoList::class],
-    version = 3,
+    version = 7,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {

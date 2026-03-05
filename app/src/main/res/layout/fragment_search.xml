@@ -1,5 +1,4 @@
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,15 +33,15 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/box1">
+                android:background="@drawable/box1"
+                android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/searchIcon"
@@ -58,11 +57,11 @@
                     android:id="@+id/searchBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
                     android:hint="@string/search_tasks_descriptions"
                     android:textColor="@color/midgreen"
                     android:textColorHint="@color/midgreen"
-                    android:textSize="16sp"
-                    android:background="@android:color/transparent"/>
+                    android:textSize="16sp" />
             </LinearLayout>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,8 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:letterSpacing="0.09"
             android:text="@string/filtered_results"
@@ -91,15 +90,15 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/tvNoResults"
@@ -110,7 +109,7 @@
                 android:text="@string/no_results_found"
                 android:textColor="@color/midgreen"
                 android:textSize="18sp"
-                android:visibility="visible"/>
+                android:visibility="visible" />
         </FrameLayout>
 
     </LinearLayout>
