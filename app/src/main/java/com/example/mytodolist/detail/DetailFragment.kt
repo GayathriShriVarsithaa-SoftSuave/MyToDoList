@@ -90,7 +90,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
 
         popbinding.taskEdit.setText(binding.detailTitle.text)
         popbinding.descriptionEdit.setText(binding.detailDescriptionBox.text)
-
+        var date=System.currentTimeMillis()
+        popbinding.popUpCalendar.setOnDateChangeListener{_,year,month,dayOfMonth->
+            val calendar=java.util.Calendar.getInstance()
+            calendar.set(year, month,dayOfMonth, 0,0,0)
+            date=calendar.timeInMillis
+        }
         fun addUserTag(tagText: String) {
             if (tagText.isBlank()) return
             val chip = Chip(requireContext()).apply {
@@ -141,12 +146,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         popbinding.editBtn.setOnClickListener {
             val title=popbinding.taskEdit.text.toString()
             val description=popbinding.descriptionEdit.text.toString()
-            val date=popbinding.popUpCalendar.date
             val tags=mutableListOf<String>()
             for (i in 0 until popbinding.popUpChip.childCount) {
                 val chip = popbinding.popUpChip.getChildAt(i) as Chip
                 tags.add(chip.text.toString())
             }
+
             viewModel.updateTask(args.taskId,title,description,tags,date)
 
             dialog.dismiss()

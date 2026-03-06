@@ -35,6 +35,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteTask(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {
             taskDao.deleteTask(task)
+            tagDao.deletetag()
         }
     }
 
