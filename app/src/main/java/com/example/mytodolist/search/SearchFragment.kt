@@ -5,23 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.mytodolist.R
+import com.example.mytodolist.base.BaseFragment
+import com.example.mytodolist.databinding.FragmentSearchBinding
 
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
+    override fun setupViews() {
+        binding.topAppBar.setNavigationOnClickListener{
+            findNavController().navigate(R.id.searchToHome)
+        }
+    }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun observeViewModel() {
 
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    override fun onClick(viewId: Int) {
+
     }
+
+
 
 }
