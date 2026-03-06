@@ -21,7 +21,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     fun updateTask(taskId:Long,title:String, description:String, tags:List<String>,date:Long)
     {
         viewModelScope.launch(Dispatchers.IO){
-            taskDao.updateTask(Task(taskId=taskId,title = title, description = description, date = date))
+            taskDao.updateTask(Task(taskId=taskId,title = title, description = description, updatedAt = System.currentTimeMillis(), date = date))
         }
     }
 }

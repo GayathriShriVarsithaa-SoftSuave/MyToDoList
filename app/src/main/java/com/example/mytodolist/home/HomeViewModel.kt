@@ -19,7 +19,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     fun addTask(title: String, description: String, tags: List<String>, deadline: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             val taskId =
-                taskDao.insertTask(Task(title = title, description = description, date = deadline))
+                taskDao.insertTask(Task(title = title, description = description, updatedAt = System.currentTimeMillis(), date = deadline))
             tags.forEach { tagName ->
                 var tag = tagDao.getTagByName(tagName)
                 if (tag == null) {

@@ -19,7 +19,7 @@ interface TaskDao {
     suspend fun updateTaskCompletion(taskId: Long, isCompleted: Boolean)
 
     @Transaction
-    @Query("SELECT * FROM tasks ORDER BY taskId DESC")
+    @Query("SELECT * FROM tasks ORDER BY updatedAt DESC,createdAt DESC")
     fun getTasksWithTags(): Flow<List<TaskWithTags>>
 
     @Transaction

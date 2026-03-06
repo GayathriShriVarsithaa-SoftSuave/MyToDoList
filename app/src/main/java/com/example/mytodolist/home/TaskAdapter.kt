@@ -9,6 +9,7 @@ import com.example.mytodolist.R
 import com.example.mytodolist.data.TaskWithTags
 import com.example.mytodolist.databinding.TaskItemBinding
 import com.google.android.material.chip.Chip
+import java.util.concurrent.TimeUnit
 
 class TaskAdapter(
     var taskList: List<TaskWithTags>,
@@ -38,9 +39,24 @@ class TaskAdapter(
         holder.binding.taskTitle.text = taskWithTags.task.title
         holder.binding.taskDescription.text = taskWithTags.task.description
         val diff = taskWithTags.task.date - System.currentTimeMillis()
-        val daysLeft = diff / (1000 * 60 * 60 * 24)
+        val days = (diff / (1000 * 60 * 60 * 24))+1
+        if(days<0){
+            holder.binding.dayLeft.text="Task expired"
+            holder.binding.dayLeft.setTextColor(ContextCompat.getColor(context,R.color.accentRed))
+        }
+        else if(days==0L){
+            holder.binding.dayLeft.text="Today"
+            holder.binding.dayLeft.setTextColor(ContextCompat.getColor(context,R.color.primaryGreen))
 
-        holder.binding.dayLeft.text = "$daysLeft Days left"
+        }
+        else if(days==1L){
+            holder.binding.dayLeft.text="Tomorrow"
+            holder.binding.dayLeft.setTextColor(ContextCompat.getColor(context,R.color.teal_200))
+        }
+        else {
+            holder.binding.dayLeft.text = "$days Days left"
+            holder.binding.dayLeft.setTextColor(ContextCompat.getColor(context,R.color.textWhite60))
+        }
         holder.binding.taskCheckbox.setOnCheckedChangeListener(null)
         holder.binding.taskCheckbox.isChecked = taskWithTags.task.isCompleted
 

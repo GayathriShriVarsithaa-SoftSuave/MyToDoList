@@ -21,6 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
@@ -73,11 +74,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             if (tagText.isBlank()) return
             val chip = Chip(requireContext()).apply {
                 text = tagText
-                isCheckable = false
+                isCheckable = true
+                isChecked=true
                 isCloseIconVisible = true
                 setChipBackgroundColorResource(R.color.primaryGreen)
                 setTextColor(requireContext().getColor(R.color.black))
                 setOnCloseIconClickListener { popbinding.popUpChip.removeView(this) }
+                setOnCheckedChangeListener{_,isChecked->
+                    if(isChecked){
+                        setChipBackgroundColorResource(R.color.primaryGreen)
+                        setTextColor(requireContext().getColor(R.color.black))
+                    }
+                    else{
+                        setChipBackgroundColorResource(R.color.midgreen)
+                        setTextColor(requireContext().getColor(R.color.white))
+                    }
+                }
             }
             popbinding.popUpChip.addView(chip)
         }
@@ -116,12 +128,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         popbinding.cancelBtn.setOnClickListener { dialog.dismiss() }
-
+        var selected_date=System.currentTimeMillis()
+        popbinding.popUpCalendar.setOnDateChangeListener{_,year,month,dayOfMonth->
+            val calendar=java.util.Calendar.getInstance()
+            calendar.set(year, month,dayOfMonth, 0,0,0)
+            selected_date=calendar.timeInMillis
+        }
         popbinding.addBtn.setOnClickListener {
             val title = popbinding.popUpTitleBox.text.toString().trim()
             val description = popbinding.popUpDescriptionBox.text.toString().trim()
-            val deadline = popbinding.popUpCalendar.date
-
+            val deadline=selected_date
             if (title.isBlank()) {
                 Toast.makeText(requireContext(), "Title should not be empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -130,7 +146,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             val tags = mutableListOf<String>()
             for (i in 0 until popbinding.popUpChip.childCount) {
                 val chip = popbinding.popUpChip.getChildAt(i) as Chip
-                tags.add(chip.text.toString())
+                if(chip.isChecked) {
+                    tags.add(chip.text.toString())
+                }
             }
 
             viewModel.addTask(title, description, tags, deadline)
