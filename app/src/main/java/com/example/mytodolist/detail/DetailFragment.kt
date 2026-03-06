@@ -1,6 +1,7 @@
 package com.example.mytodolist.detail
 
 import android.content.res.ColorStateList
+import kotlinx.coroutines.flow.first
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -17,18 +18,21 @@ import com.example.mytodolist.data.TaskWithTags
 import com.example.mytodolist.databinding.AddTaskPopupBinding
 import com.example.mytodolist.databinding.EditPageBinding
 import com.example.mytodolist.databinding.FragmentDetailBinding
+import com.example.mytodolist.home.TaskAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
     private val args by navArgs<DetailFragmentArgs>()
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: DetailViewModel
+    private lateinit var adapter: TaskAdapter
 
     override fun setupViews() {
 
-        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.allTasks.collect { taskList ->
                 val task = taskList.find { it.task.taskId == args.taskId }
@@ -84,8 +88,69 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(popbinding.root)
 
-        popbinding.titleEdit.setText(binding.detailTitle.text)
+        popbinding.taskEdit.setText(binding.detailTitle.text)
         popbinding.descriptionEdit.setText(binding.detailDescriptionBox.text)
+
+        fun addUserTag(tagText: String) {
+            if (tagText.isBlank()) return
+            val chip = Chip(requireContext()).apply {
+                text = tagText
+                isCheckable = false
+                isCloseIconVisible = true
+                setChipBackgroundColorResource(R.color.primaryGreen)
+                setTextColor(requireContext().getColor(R.color.black))
+                setOnCloseIconClickListener { popbinding.popUpChip.removeView(this) }
+            }
+            popbinding.popUpChip.addView(chip)
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            val tagList = viewModel.alltags.first()
+                tagList.forEach { tag ->
+                    val chip = Chip(requireContext()).apply {
+                        text = tag
+                        isCheckable = true
+                        setChipBackgroundColorResource(R.color.midgreen)
+                        setTextColor(requireContext().getColor(R.color.white))
+                    }
+                    chip.setOnCheckedChangeListener { _, isChecked ->
+                        if (isChecked) {
+                            chip.setChipBackgroundColorResource(R.color.primaryGreen)
+                            chip.setTextColor(requireContext().getColor(R.color.black))
+                        } else {
+                            chip.setChipBackgroundColorResource(R.color.midgreen)
+                            chip.setTextColor(requireContext().getColor(R.color.white))
+                        }
+                    }
+                    popbinding.popUpChip.addView(chip)
+                }
+            }
+
         dialog.show()
+        popbinding.cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        popbinding.tagEditText.setOnEditorActionListener { _, _, _ ->
+            addUserTag(popbinding.tagEditText.text.toString().trim())
+            popbinding.tagEditText.text.clear()
+            true
+        }
+        popbinding.addTagIcon.setOnClickListener{
+            addUserTag(popbinding.tagEditText.text.toString())
+            popbinding.tagEditText.text.clear()
+        }
+        popbinding.editBtn.setOnClickListener {
+            val title=popbinding.taskEdit.text.toString()
+            val description=popbinding.descriptionEdit.text.toString()
+            val date=popbinding.popUpCalendar.date
+            val tags=mutableListOf<String>()
+            for (i in 0 until popbinding.popUpChip.childCount) {
+                val chip = popbinding.popUpChip.getChildAt(i) as Chip
+                tags.add(chip.text.toString())
+            }
+            viewModel.updateTask(args.taskId,title,description,tags,date)
+
+            dialog.dismiss()
+
+        }
     }
 }

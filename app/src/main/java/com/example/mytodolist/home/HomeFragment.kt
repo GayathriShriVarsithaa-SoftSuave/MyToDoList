@@ -43,7 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.homeRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.homeRecycler.adapter = adapter
 
-        // Attach swipe-to-delete with confirmation
+
         setupSwipeToDelete()
     }
 
@@ -179,7 +179,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     dialog.dismiss()
                 }
                 dialogbinding.deleteBtn.setOnClickListener {
-                    //viewModel.detetetask()
+                    viewModel.deleteTask(task.task)
                     adapter.notifyDataSetChanged()
                     Toast.makeText(requireContext(),"Deleted!!",Toast.LENGTH_SHORT).show()
                     dialog.dismiss()

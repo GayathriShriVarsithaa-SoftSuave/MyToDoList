@@ -32,9 +32,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     val alltags: Flow<List<String>> = tagDao.getAllTag()
-    fun deleteTask(taskWithTags: TaskWithTags) {
+    fun deleteTask(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {
-            taskDao.deleteTask(taskWithTags.task)
+            taskDao.deleteTask(task)
         }
     }
 
