@@ -40,7 +40,11 @@ class TaskAdapter(
         holder.binding.taskDescription.text = taskWithTags.task.description
         val diff = taskWithTags.task.date - System.currentTimeMillis()
         val days = (diff / (1000 * 60 * 60 * 24))+1
-        if(days<0){
+        if(taskWithTags.task.isCompleted){
+            holder.binding.dayLeft.text="Task completed"
+            holder.binding.dayLeft.setTextColor(ContextCompat.getColor(context,R.color.purple_200))
+        }
+        else if(days<0){
             holder.binding.dayLeft.text="Task expired"
             holder.binding.dayLeft.setTextColor(ContextCompat.getColor(context,R.color.accentRed))
         }

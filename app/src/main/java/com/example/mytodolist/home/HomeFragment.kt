@@ -2,7 +2,7 @@ package com.example.mytodolist.home
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+//import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytodolist.R
 import com.example.mytodolist.base.BaseFragment
-import com.example.mytodolist.data.*
+//import com.example.mytodolist.data.*
 import com.example.mytodolist.databinding.AddTaskPopupBinding
 import com.example.mytodolist.databinding.DeleteconformationBinding
 import com.example.mytodolist.databinding.FragmentHomeBinding
@@ -21,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
-import java.util.Calendar
+//import java.util.Calendar
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
@@ -91,6 +91,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     }
                 }
             }
+
             popbinding.popUpChip.addView(chip)
         }
 

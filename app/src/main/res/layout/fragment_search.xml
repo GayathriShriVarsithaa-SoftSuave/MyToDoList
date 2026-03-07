@@ -70,6 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:chipSpacingHorizontal="8dp"
             app:chipSpacingVertical="8dp"
             app:singleLine="false" />
@@ -85,7 +87,7 @@
             android:letterSpacing="0.09"
             android:text="@string/filtered_results"
             android:textColor="@color/midgreen"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <FrameLayout
             android:layout_width="match_parent"
