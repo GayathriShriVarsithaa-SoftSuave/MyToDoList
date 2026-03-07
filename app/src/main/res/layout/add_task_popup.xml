@@ -1,49 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="#0A110D"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:layout_height="match_parent"
+    android:background="@color/darkGreen"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/new_task"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_marginStart="15dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/task_title"
-            android:textColor="#A5A5A5"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/popUpHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/new_task"
+                android:textColor="@color/textWhite"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/box"
-            android:hint="@string/add_title"
-            android:inputType="text"
-            android:paddingStart="20dp"
-            android:textColor="#A5A5A5"
-            android:textColorHint="#4D5650"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/popUpTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/task_title"
+                android:textColor="@color/textWhite60"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/popUpTitleBox"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/box"
+                android:backgroundTint="@color/mediumGreen"
+                android:hint="@string/add_title"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/textWhite60"
+                android:textColorHint="@color/textWhite54"
+                android:textSize="14sp" />
 
-</com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/popUpDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/description1"
+                android:textColor="@color/textWhite60"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/popUpDescriptionBox"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/box"
+                android:backgroundTint="@color/mediumGreen"
+                android:gravity="top"
+                android:hint="@string/add_more_details"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:paddingStart="20dp"
+                android:paddingTop="7dp"
+                android:paddingEnd="20dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/textWhite60"
+                android:textColorHint="@color/textWhite54"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/popupTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/tags"
+                android:textColor="@color/textWhite60"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/popUpChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="8dp"
+                app:chipSpacingVertical="8dp"
+                app:singleLine="false">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/box"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/mediumGreen"
+                android:gravity="center_vertical">
+
+                <EditText
+                    android:id="@+id/tagEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:hint="@string/create_new_tag"
+                    android:inputType="text"
+                    android:paddingStart="20dp"
+                    android:textColor="@color/textWhite60"
+                    android:textColorHint="@color/textWhite54"
+                    android:textSize="14sp"
+                    android:background="@android:color/transparent"
+                    android:importantForAutofill="no"/>
+
+                <ImageView
+                    android:id="@+id/addTagIcon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/baseline_add_24"
+                    app:tint="@color/textWhite54"
+                    android:padding="8dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/popupDeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/deadline"
+                android:textColor="@color/textWhite60"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <CalendarView
+                android:id="@+id/popUpCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dateTextAppearance="@style/WhiteDateText"
+                android:selectedDateVerticalBar="@color/green"
+                android:weekDayTextAppearance="@style/WhiteWeekText"
+                android:weekNumberColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/mediumGreen"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/textWhite60"
+                    app:cornerRadius="10dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/primaryGreen"
+                    android:text="@string/add_task"
+                    android:textColor="@color/black"
+                    app:cornerRadius="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

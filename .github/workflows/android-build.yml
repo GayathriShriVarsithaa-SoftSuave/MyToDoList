@@ -3,67 +3,67 @@ name: Android CI
 on:
   push:
     branches:
-      - main       # triggers only on pushes to main
+      - '**'
   pull_request:
     branches:
-      - main       # triggers on PR to main
+      - '**'
+
+# Essential to allow the workflow to create tags and releases
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repository with full history (needed for tagging)
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      # 2. Setup JDK
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. Grant gradlew permission
       - name: Grant Permission
         run: chmod +x gradlew
 
-      # 4. Clean and build the project
       - name: Build Project
         run: ./gradlew clean assembleDebug
 
-      # 5. Upload APK as workflow artifact
-      - name: Upload APK
+      - name: Set Environment Variables
+        run: |
+          # Use GITHUB_HEAD_REF for PRs, otherwise GITHUB_REF_NAME
+          RAW_BRANCH=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
+          # Replace slashes with dashes to avoid git ref errors
+          SAFE_BRANCH_NAME="${RAW_BRANCH//\//-}"
+          
+          echo "ARTIFACT_NAME=debug-apk-${SAFE_BRANCH_NAME}" >> $GITHUB_ENV
+          echo "TAG_NAME=${SAFE_BRANCH_NAME}-v1.${GITHUB_RUN_ID}" >> $GITHUB_ENV
+
+      - name: Upload APK as Workflow Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: debug-apk
+          name: ${{ env.ARTIFACT_NAME }}
           path: app/build/outputs/apk/debug/app-debug.apk
 
-      # 6. Create automatic tag only on main branch pushes
-      - name: Create Tag
-        if: github.ref == 'refs/heads/main'
+      - name: Create and Push Tag
         run: |
-          TAG=v1.${{ github.run_number }}
-          echo "TAG=$TAG" >> $GITHUB_ENV
-          git tag $TAG
-          git push origin $TAG
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ env.TAG_NAME }}
+          git push origin ${{ env.TAG_NAME }}
 
-      # 7. Create GitHub release and attach APK (uses the created tag)
-      - name: Create Release
-        if: github.ref == 'refs/heads/main'
+      - name: Create Release and Upload APK
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.TAG }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload APK to Release
-        if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v1
-        with:
+          tag_name: ${{ env.TAG_NAME }}
           files: app/build/outputs/apk/debug/app-debug.apk
-          tag_name: ${{ env.TAG }}
+          name: Release ${{ env.TAG_NAME }}
+          draft: false
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
