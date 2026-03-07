@@ -51,7 +51,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         binding.detailTitle.text = taskWithTags.task.title
         binding.detailDescriptionBox.text = taskWithTags.task.description
         binding.detailChip.removeAllViews()
-
+        binding.detailDate.text=taskWithTags.task.date.toString()
         taskWithTags.tags.forEach { tag ->
             val chip = Chip(requireContext()).apply {
                 text = tag.tag
@@ -87,10 +87,17 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(FragmentDetailBinding
         val popbinding= EditPageBinding.inflate(layoutInflater)
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(popbinding.root)
-
+        val prevdate=try {
+            binding.detailDate.text.toString().toLong()
+        }
+        catch (e:Exception){
+            System.currentTimeMillis()
+        }
+        popbinding.popUpCalendar.date=prevdate
+        var date=prevdate
         popbinding.taskEdit.setText(binding.detailTitle.text)
         popbinding.descriptionEdit.setText(binding.detailDescriptionBox.text)
-        var date=System.currentTimeMillis()
+        popbinding.popUpCalendar.minDate=System.currentTimeMillis()
         popbinding.popUpCalendar.setOnDateChangeListener{_,year,month,dayOfMonth->
             val calendar=java.util.Calendar.getInstance()
             calendar.set(year, month,dayOfMonth, 0,0,0)
