@@ -52,6 +52,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.allTasks.collect { taskList ->
                 adapter.submitList(taskList)
+                if(taskList.isEmpty())
+                {
+                    binding.addTasktext1.visibility=View.VISIBLE
+                }
             }
         }
     }
