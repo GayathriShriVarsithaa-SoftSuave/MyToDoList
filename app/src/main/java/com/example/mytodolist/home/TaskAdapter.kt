@@ -9,6 +9,9 @@ import com.example.mytodolist.R
 import com.example.mytodolist.data.TaskWithTags
 import com.example.mytodolist.databinding.TaskItemBinding
 import com.google.android.material.chip.Chip
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class TaskAdapter(
@@ -41,7 +44,7 @@ class TaskAdapter(
         val diff = taskWithTags.task.date - System.currentTimeMillis()
         val days = (diff / (1000 * 60 * 60 * 24))+1
         if(taskWithTags.task.isCompleted){
-            holder.binding.dayLeft.text="Task completed"
+            holder.binding.dayLeft.text="Done"
             holder.binding.dayLeft.setTextColor(ContextCompat.getColor(context,R.color.purple_200))
         }
         else if(days<0){

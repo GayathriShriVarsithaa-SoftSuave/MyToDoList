@@ -21,6 +21,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
 //import java.util.Calendar
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -73,6 +77,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         dialog.setContentView(popbinding.root)
 
         popbinding.popUpCalendar.minDate = System.currentTimeMillis()
+        val curr=System.currentTimeMillis()
+        val formater= SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val dateStr=formater.format(Date(curr))
+        popbinding.dateText.setText(dateStr)
 
         fun addUserTag(tagText: String) {
             if (tagText.isBlank()) return
@@ -138,6 +146,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             val calendar=java.util.Calendar.getInstance()
             calendar.set(year, month,dayOfMonth, 0,0,0)
             selected_date=calendar.timeInMillis
+            val formater=SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+            val dateStr=formater.format(Date(selected_date))
+            popbinding.dateText.setText(dateStr)
         }
         popbinding.addBtn.setOnClickListener {
             val title = popbinding.popUpTitleBox.text.toString().trim()
@@ -167,7 +178,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 it.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
                 val behavior = BottomSheetBehavior.from(it)
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
-                behavior.isFitToContents = true
+                behavior.isFitToContents = false
                 behavior.skipCollapsed = true
                 behavior.isDraggable = true
             }
@@ -195,7 +206,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     .setCancelable(false)
                     .create()
 
-
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
                 dialog.show()
                 dialogbinding.cancelBtn.setOnClickListener {
                     adapter.notifyDataSetChanged()

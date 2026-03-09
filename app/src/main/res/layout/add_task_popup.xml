@@ -41,7 +41,7 @@
             <EditText
                 android:id="@+id/popUpTitleBox"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/box"
@@ -151,21 +151,51 @@
                 android:text="@string/deadline"
                 android:textColor="@color/textWhite60"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/datebox">
+                <ImageView
+                    android:id="@+id/searchIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="9dp"
+                    android:src="@drawable/baseline_calendar_today_24"
+                    app:tint="@color/primaryGreen" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="text"
+                    android:id="@+id/dateText"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/textWhite70"
+                    android:textSize="18sp"/>
+            </LinearLayout>
 
             <CalendarView
                 android:id="@+id/popUpCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:dateTextAppearance="@style/WhiteDateText"
+                android:layout_marginEnd="10dp"
                 android:selectedDateVerticalBar="@color/green"
                 android:weekDayTextAppearance="@style/WhiteWeekText"
-                android:weekNumberColor="@color/white" />
+                android:weekNumberColor="@color/white"
+                android:background="@drawable/calendarbox"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="30dp"
+                android:layout_marginEnd="10dp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cancelBtn"

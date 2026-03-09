@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.mytodolist.data.AppDatabase
 import com.example.mytodolist.data.Tag
 import com.example.mytodolist.data.TaskWithTags
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +17,6 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         search()
     }
     private val dao = AppDatabase.getDatabase(application).taskDao()
-
     private val query = MutableStateFlow("")
     private val selectedTags = MutableStateFlow<List<String>>(emptyList())
 
@@ -47,5 +47,10 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     suspend fun getAllTags(): List<Tag> {
         return dao.getAllTags()
+    }
+    fun updateCompletion(taskId: Long, isCompleted: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dao.updateTaskCompletion(taskId, isCompleted)
+        }
     }
 }

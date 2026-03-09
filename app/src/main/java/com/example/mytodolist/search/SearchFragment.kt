@@ -55,15 +55,16 @@ class SearchFragment :
     private fun setupRecyclerView() {
         adapter = TaskAdapter(
             emptyList(),
-            onCheckedChange = { _, _ -> },
+            onCheckedChange = { taskId, isChecked ->
+                viewModel.updateCompletion(taskId, isChecked)
+                              },
             onItemClick = { taskId ->
                 val action =
                     SearchFragmentDirections.searchToDetail(taskId)
                 findNavController().navigate(action)
             }
         )
-        binding.recyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
     }
 
